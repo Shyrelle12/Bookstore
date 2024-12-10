@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            }
+        .login-page {
+            width: 300px;
+            margin: 0 auto;
+            padding: 60px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 0;
+            }
+        p {
+            font-size: x-small;
+            margin-bottom: 25px;
+            text-align: center;
+            }
+        .input-box input{
+            width: 100%;
+            margin-right: 10px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 40px;
+             }
+        .btn {
+            border-radius: 50px;
+            padding: 10px 20px;
+            box-sizing: 0 0 10px rgba(0, 0, 0, .1);
+            }
+
+    </style>
+</head>
+<body>
+    <div class="login-page">
+        <div class="form">
+            <h2>Register</h2>
+            <form method="POST" action="/register">
+                <div class="input-box">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" style="margin-top: 10px;" required>
+                </div>
+                <div class="input-box">
+                    <input type="text" class="form-control" id="email" name="email" placeholder="Email" style="margin-top: 10px;" required>
+                </div>
+                <div class="input-box">
+                    <input type="text" class="form-control" id="address" name="address" placeholder="Address" style="margin-top: 10px;" required>
+                </div>
+                <div class="input-box">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" style="margin-top: 10px;" required>
+                </div>
+                <!--p><input type="checkbox">By creating an account you agree to our Terms & Privacy.</p-->
+                <button type="submit" class="btn btn-primary" style="margin-left: 105px; margin-bottom: 20px; margin-top: 20px;">Register</button>
+
+                <div class="register-link">
+                    <p> Already have an account? <a href="/index"> Login </a></p>
+                </div>
+            </form>
+
+        </div>
+      </div>
+</body>
+</html>
