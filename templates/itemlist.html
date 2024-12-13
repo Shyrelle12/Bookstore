@@ -7,191 +7,204 @@
     <title>Shyrelle - Item List</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-    body{
-        background-image: linear-gradient(to right, #d7d2cc 0%, #304352 100%);
-    }
-</style>
+    <style>
+        body {
+            background-image: linear-gradient(to right, #d7d2cc 0%, #304352 100%);
+        }
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+        .container-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .table-container {
+            width: 100%;
+            max-width: 1100px; /* Adjust the max-width as needed */
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
-    <div class="container-fluid">
-        <h2 class="text-center" style="color: white; margin-bottom: 80px;"></h2>
-        
-                <h3>Item List <button style="margin-left: 555px;" class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal" style="color:#304352">Add</button></h3>
 
-                <form method="POST" action="{{ url_for('itemlist') }}">
-                    <input style="margin-bottom: 20px;" type="text" name="search" placeholder="Search name...">
-                    <input type="submit" value="Search">
-                  </form>
+    <div class="container-center">
+        <div class="table-container">
+            <h3 class="d-flex justify-content-between align-items-center">
+                Item List
+                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="color:#304352; border-radius: 60px; padding: 1px 10px;">
+                    <i class="fa fa-plus" style="margin-right: 5px;"></i>Add
+                </button>
+            </h3>         
+            
+            <form method="POST" action="{{ url_for('itemlist') }}">
+                <input style="margin-bottom: 20px;" type="text" name="search" placeholder="Search name...">
+                <input type="submit" value="Search">
+            </form>
 
-                {% with messages = get_flashed_messages() %}
+            {% with messages = get_flashed_messages() %}
                 {% if messages %}
-                {% for message in messages %}
-                <!--div class="alert alert-success alert-dismissable" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    {{ message }}
-                </div-->
-                {% endfor %}
+                    {% for message in messages %}
+                    <!-- Flash messages (optional) -->
+                    {% endfor %}
                 {% endif %}
-                {% endwith %}
+            {% endwith %}
 
-                <!--add-->
-                <div id="myModal" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
+            <!-- Add Modal -->
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-primary" style="align-content: center;">Add New Item</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
 
-                            <div class="modal-header">
-                                <h5 class="modal-title text-primary" style="align-content: center;">Add New Item</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
+                        <div class="modal-body">
+                            <form action="{{url_for('add')}}" method="POST">
+                                <div class="form-group">
+                                    <label>TITLE</label>
+                                    <input type="text" name="title" class="form-control" placeholder="Enter Title">
+                                </div>
 
-                            <div class="modal-body">
-                                <form action="{{url_for('add')}}" method="POST">
-                                    <!-- <div class="form-group">
-                                        <label>ISBN</label>
-                                        <input type="text" name="isbn" class="form-control" id="exampleFormControlTextarea1" placeholder="Enter ISBN" rows="3"></textarea>
-                                      </div> -->
+                                <div class="form-group">
+                                    <label>AUTHOR</label>
+                                    <input type="text" name="author" class="form-control" placeholder="Enter Author">
+                                </div>
 
-                                      <div class="form-group">
-                                        <label>TITLE</label>
-                                        <input type="text" name="title" class="form-control" id="exampleFormControlTextarea1" placeholder="Enter Title" rows="3"></textarea>
-                                      </div>
+                                <div class="form-group">
+                                    <label>GENRE</label>
+                                    <input type="text" name="genre" class="form-control" placeholder="Enter Genre">
+                                </div>
 
-                                      <div class="form-group">
-                                        <label>AUTHOR</label>
-                                        <input type="text" name="author" class="form-control" id="exampleFormControlTextarea1" placeholder="Enter Author" rows="3"></textarea>
-                                      </div>
+                                <div class="form-group">
+                                    <label>PRICE</label>
+                                    <input type="text" name="price" class="form-control" placeholder="Enter Price">
+                                </div>
 
-                                      <div class="form-group">
-                                        <label>GENRE</label>
-                                        <input type="text" name="genre" class="form-control" id="exampleFormControlTextarea1" placeholder="Enter Genre" rows="3"></textarea>
-                                      </div>
+                                <div class="form-group">
+                                    <label>TYPE</label>
+                                    <input type="text" name="type" class="form-control" placeholder="Enter Type">
+                                </div>
 
-                                      <div class="form-group">
-                                        <label>PRICE</label>
-                                        <input type="text" name="price" class="form-control" id="exampleFormControlTextarea1" placeholder="Enter Price" rows="3"></textarea>
-                                      </div>
-
-                                      <div class="form-group">
-                                        <label>TYPE</label>
-                                        <input type="text" name="type" class="form-control" id="exampleFormControlTextarea1" placeholder="Enter Type" rows="3"></textarea>
-                                      </div>
-
-                                      <button type="submit" class="btn btn-primary mb-2">Save</button>
-
-                                  </form>
-
-                            </div>
+                                <button type="submit" class="btn btn-primary mb-2">Save</button>
+                            </form>
                         </div>
                     </div>
-                </div> 
-                <!--end sa add-->
+                </div>
+            </div> 
 
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">ISBN</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Author</th>
-                            <th scope="col">Genre</th>
-                            <th scope="col">Stock</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Type</th>
+            <!-- Item Table -->
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ISBN</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Author</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td>{{ item['id'] }}</td>
+                        <td>{{ item['isbn'] }}</td>
+                        <td>{{ item['title'] }}</td>
+                        <td>{{ item['author'] }}</td>
+                        <td>{{ item['genre'] }}</td>
+                        <td>{{ item['qty'] }}</td>
+                        <td>{{ item['price'] }}</td>
+                        <td>{{ item['type'] }}</td>
+                        <td>
+                          <div class="d-flex justify-content-start">
+                              <!-- Edit Button -->
+                              <a href="{{ url_for('edititem', item_id=item['id']) }}" class="btn btn-warning btn-sm mr-2" data-toggle="modal" data-target="#modaledit{{ item['id'] }}" style="border-radius: 50%; padding: 10px 15px;">
+                                  <i class="fa fa-pencil"></i>
+                              </a>
+                              
+                              <!-- Delete Button -->
+                              <a href="{{ url_for('deleteitem', item_id=item['id']) }}" onclick="return confirm('Are You Sure You Want To Delete This Record?')" class="btn btn-danger btn-sm" style="border-radius: 50%; padding: 10px 15px;">
+                                  <i class="fa fa-trash"></i>
+                              </a>
+                          </div>
+                      </td>                      
+                    </tr>
 
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for item in items %}
-                        <tr>
-                            <td>{{ item['id'] }}</td>
-                            <td>{{ item['isbn'] }}</td>
-                            <td>{{ item['title'] }}</td>
-                            <td>{{ item['author'] }}</td>
-                            <td>{{ item['genre'] }}</td>
-                            <td>{{ item['qty'] }}</td>
-                            <td>{{ item['price'] }}</td>
-                            <td>{{ item['type'] }}</td>
-                            <td>
-                                <a href="{{ url_for('edititem', item_id=item['id']) }}" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modaledit{{ item['id'] }}">Edit</a>
-                                <a href="{{ url_for('deleteitem', item_id=item['id']) }}" onclick="return confirm('Are You Sure You Want To Delete This Record?')" class="btn btn-danger btn-sm">Delete</a>
-                            </td>
-                        </tr>
+                    <!-- Edit Modal -->
+<div id="modaledit{{ item['id'] }}" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title text-primary">Update Item Details</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
 
-                        <!--edit-->
-                        <div id="modaledit{{ item['id'] }}" class="modal fade" role="dialog">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
+          <div class="modal-body">
+              <form action="{{ url_for('edititem', item_id=item['id']) }}" method="POST">
+                  <input type="hidden" name="id" value="{{ item['id'] }}">
 
-                                    <div class="modal-header">
-                                        <h5 class="modal-title text-primary" style="align-content: center;">Update Customer Details</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
-                                        </button>
-                                      </div>
+                  <!-- Hidden ISBN Field (to send ISBN to the server) -->
+                  <input type="hidden" name="isbn" value="{{ item['isbn'] }}">
 
-                                    <div class="modal-body">
-                                        <form action="{{ url_for('edititem', item_id=item['id']) }}" method="POST">
-                                            <input type="hidden" name="id" value="{{ item['id'] }}">
-                                            <div class="form-group">
-                                                <!-- <label>ISBN</label> -->
-                                                <input value="{{ item['isbn'] }}" hidden type="text" name="isbn" class="form-control" id="exampleFormControlTextarea1" placeholder="Enter Full Name" rows="3"></textarea>
-                                              </div>
+                  <!-- ISBN Display (non-editable) -->
+                  <div class="form-group">
+                      <label>ISBN</label>
+                      <div class="form-control-plaintext">{{ item['isbn'] }}</div>
+                  </div>
 
-                                              <div class="form-group">
-                                                <label>Title</label>
-                                                <input value="{{ item['title'] }}" type="text" name="title" class="form-control" id="exampleFormControlTextarea1" placeholder="Enter Full Name" rows="3"></textarea>
-                                              </div>
-                                              <div class="form-group">
-                                                <label>Author</label>
-                                                <input value="{{ item['author'] }}" type="text" name="author" class="form-control" id="exampleFormControlTextarea1" placeholder="Enter Full Name" rows="3"></textarea>
-                                              </div>
-                                              <div class="form-group">
-                                                <label>Genre</label>
-                                                <input value="{{ item['genre'] }}" type="text" name="genre" class="form-control" id="exampleFormControlTextarea1" placeholder="Enter Full Name" rows="3"></textarea>
-                                              </div>
-                                              <div class="form-group">
-                                                <label>Price</label>
-                                                <input value="{{ item['price'] }}" type="text" name="price" class="form-control" id="exampleFormControlTextarea1" placeholder="Enter Full Name" rows="3"></textarea>
-                                              </div>
-                                              <div class="form-group">
-                                                <label>Type</label>
-                                                <input value="{{ item['type'] }}" type="text" name="type" class="form-control" id="exampleFormControlTextarea1" placeholder="Enter Full Name" rows="3"></textarea>
-                                              </div>
-                                             
+                  <div class="form-group">
+                      <label>Title</label>
+                      <input value="{{ item['title'] }}" type="text" name="title" class="form-control">
+                  </div>
 
-                                              <button type="submit" class="btn btn-primary mb-2">Save</button>
+                  <div class="form-group">
+                      <label>Author</label>
+                      <input value="{{ item['author'] }}" type="text" name="author" class="form-control">
+                  </div>
 
-                                          </form>
+                  <div class="form-group">
+                      <label>Genre</label>
+                      <input value="{{ item['genre'] }}" type="text" name="genre" class="form-control">
+                  </div>
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div> 
-                        <!--end sa edit-->
+                  <div class="form-group">
+                      <label>Price</label>
+                      <input value="{{ item['price'] }}" type="text" name="price" class="form-control">
+                  </div>
 
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-sm-2"></div>
+                  <div class="form-group">
+                      <label>Type</label>
+                      <input value="{{ item['type'] }}" type="text" name="type" class="form-control">
+                  </div>
+
+                  <button type="submit" class="btn btn-primary mb-2">Save</button>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button style="margin-left: 10px;">
+              <a href="{{ url_for('admin_dashboard') }}" style="text-decoration: none; color: black;">
+                  <i style="font-size: 20px;" class="fa fa-arrow-left"></i>
+              </a>
+          </button>          
         </div>
     </div>
-
-<button style="margin-left: 10px;">
-  <a href="{{ url_for('admin_dashboard') }}" style="text-decoration: none; color: black;">
-      <i style="font-size: 20px;" class="fa">&#xf0a8;</i>
-  </a>
-</button>
-
-
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
